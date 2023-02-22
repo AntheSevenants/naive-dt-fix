@@ -1,6 +1,7 @@
-fix_participle_dt <- function(df, column,
-  ignore_list=c("geplant", "ingepland", "gebaad", "geracet", "opgenoemd",
-  "gefaket")) {
+fix_participle_dt <- function(df,
+  column,
+  ignore_list=c("geplant", "ingepland", "gebaad", "opgenoemd"),
+  correct_list=c("geracet", "gefaket")) {
   
   # First, we check what participles are in the dataset
   all_participles <- unique(df[[column]])
@@ -11,7 +12,7 @@ fix_participle_dt <- function(df, column,
   for (participle in all_participles) {
     # Some forms are ambiguous, so they have to be ignored
     # Other forms most language users just don't spell right...
-    if (participle %in% ignore_list) {
+    if (participle %in% ignore_list | participle %in% correct_list) {
       next
     }
   
@@ -38,13 +39,15 @@ fix_participle_dt <- function(df, column,
   
     # If the alternative is not found in the dataset, 
     # definitely don't consider it
-    if (is.na(participle_alternative_frequency)) {
+    if (is.na(participle_alternative_frequency) && 
+        !(alternative_form %in% correct_list)) {
       next
     }
   
     # If the alternative form is more popular, assume it is correct
     # We replace all wrong attestations with the correct spelling
-    if (participle_alternative_frequency > participle_frequency) {
+    if (participle_alternative_frequency > participle_frequency | 
+          alternative_form %in% correct_list) {
       df[[column]] <- gsub(participle, alternative_form, df[[column]])
       print(paste0("Replacing '", participle, "' with '", alternative_form,
                    "'"))
