@@ -34,12 +34,16 @@ Place `naive-dt-fix.R` from this repository in the directory of your R project. 
 source("naive-dt-fix.R")
 ```
 
-You can now use the `fix_participle_dt` function. It has two arguments:
+You can now use the `fix_participle_dt` function. It has four arguments, two of which are optional:
 
 | parameter | type    | description                                      | example |
 | --------- | ------- | ------------------------------------------------ | -------| 
 | `df` | data.frame | the dataframe which contains the column you want to correct | / |
 | `column` | character | the name of the column you want to correct | `"participle"` |
+| `ignore_list` (optional) | character | a vector containing ambiguous forms which should be ignored | / |
+| `correct_list` (optional) | character | a vector containing correct forms which should always take precedence over alternatives | / |
+
+If you do not specify `ignore_list` or `correct_list`, the built-in defaults will be used.
 
 The function returns the input data frame with the corrections applied.
 
