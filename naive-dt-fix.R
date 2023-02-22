@@ -54,4 +54,6 @@ fix_participle_dt <- function(df,
                    "'"))
     }
   }
+  
+  return(df)
 }
