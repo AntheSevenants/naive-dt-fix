@@ -59,3 +59,4 @@ Check this output for mistakes! The library is by NO means perfect!
 
 ## Future work
 
+- extend the built-in lists by collecting all verbal past participles in SoNaR.
