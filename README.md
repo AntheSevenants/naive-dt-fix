@@ -19,13 +19,13 @@ The proposed solution is inherently flawed in that it relies on the relative fre
 2. Then, it goes over each unique participle individually.
     - If the participle ends in *d*, it constructs that same participle, but ending in *t*. For example, if it comes across *gedansd*, it creates a form *gedanst* in memory.
     - If the participle ends in *t*, it constructs that same participle, but ending in *d*. For example, if it comes across *ontwikkelt*, it creates a form *ontwikkeld* in memory.
-    - If the alternative form in memory is more frequent in your dataset than the original participle, the original participle is replaced with the more frequent form. For example, it is likely that most language users will spell *gedanst* correctly, so the incorrect form *gedansd* will be replaceds.
+    - If the alternative form in memory is more frequent in your dataset than the original participle, the original participle is replaced with the more frequent form. For example, it is likely that most language users will spell *gedanst* correctly, so the incorrect form *gedansd* will be replaced.
 
-There are a few problems with this approach. I have tried to rectify these:
+There are a few problems with this approach. I tried to rectify these as well as I could given the scope of the project:
 
-- Some forms are ambiguous and can appear both with *d* and with *t*. For example, the participle of *planten* is *geplant*, the participle of *plannen* is *gepland*. It depends on the context of the sentence whether either of these forms is actually spelt correctly. Since this is a *naive* approach, we do not actually look at the context. Still, we do not want *geplant* to be replaced by *gepland* when the latter form is by chance more frequent. This is why the library ships with a list of ambiguous cases. Should your dataset contain an ambiguous pair that is not included automatically in the library, you can overwrite the list yourself.
-- Some forms most language users simply cannot spell. This means that the blatantly wrong form is the most frequent, which causes the replacement function to replace all correct forms with wrong ones. This is especially frequent for verbs derived from English. To combat this issue, the library ships with a list of *absolutely correct* participles. Should your dataset contain a very frequently misspelt form that is not included automatically in the library, you can overwrite the list yourself.
-- If a correct form does not appear *at all*, incorrect spellings will never be fixed. I built in a makeshift solution for this issue by giving precedence to forms in the list of *absolutely correct* participles, but of course I cannot include every single correct participle manually. The whole purpose of this library is to sidestep these kinds of lists by relying on frequency information. It remains important to always check your output for mistakes.
+- Some forms are ambiguous and can appear both with *d* and with *t*. For example, the past participle of *planten* is *geplant*, the participle of *plannen* is *gepland*. It depends on the context of the sentence whether either of these forms is actually spelt correctly. Since this is a *naive* approach, we do not actually look at the context. Still, we do not want *geplant* to be replaced by *gepland* when the latter form is by chance more frequent (or vice versa). This is why the library ships with a list of ambiguous cases. These cases are ignored. Should your dataset contain an ambiguous pair that is not included automatically in the library, you can overwrite the list yourself.
+- Some forms most language users simply cannot spell. This means that the blatantly wrong form is the most frequent, which causes the replacement function to replace all correct forms with wrong ones. This is especially frequent for verbs derived from English. To combat this issue, the library ships with a list of *absolutely correct* participles. The replacement function will always give precedence to forms on this list. Should your dataset contain a very frequently misspelt form that is not included automatically in the library, you can overwrite the list yourself.
+- If a correct form does not appear *at all*, incorrect spellings will never be fixed. I built in a makeshift solution for this issue by *always* giving precedence to forms in the list of *absolutely correct* participles, but of course I cannot include every single correct participle manually. The whole purpose of this library is to sidestep these kinds of lists by relying on frequency information. It remains important to always check your output for mistakes.
 
 ## How to use the library
 
@@ -59,4 +59,4 @@ Check this output for mistakes! The library is by NO means perfect!
 
 ## Future work
 
-- extend the built-in lists by collecting all verbal past participles in SoNaR.
+- extend the built-in lists by collecting all verbal past participles in SoNaR and checking for mistakes.
