@@ -2,7 +2,8 @@ fix_participle_dt <- function(df,
   column,
   ignore_list=c("geplant", "gepland", "ingeplant", "ingepland",
                 "gebaad", "gebaat"),
-  correct_list=c("geracet", "gefaket", "opgenoemd")) {
+  correct_list=c("geracet", "gefaket", "opgenoemd", "getwitterd",
+                 "gecrasht", "geliket")) {
   
   # First, we check what participles are in the dataset
   all_participles <- unique(df[[column]])
