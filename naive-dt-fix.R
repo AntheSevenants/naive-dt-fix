@@ -1,7 +1,7 @@
 fix_participle_dt <- function(df,
   column,
   ignore_list=c("geplant", "gepland", "ingeplant", "ingepland",
-                "gebaad", "gebaat"),
+                "gebaad", "gebaat", "geniest", "geniesd"),
   correct_list=c("geracet", "gefaket", "opgenoemd", "getwitterd",
                  "gecrasht", "geliket")) {
   
