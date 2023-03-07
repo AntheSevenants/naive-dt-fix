@@ -14,7 +14,7 @@ fix_participle_dt <- function(df,
   for (participle in all_participles) {
     # Some forms are ambiguous, so they have to be ignored
     # Other forms most language users just don't spell right...
-    if (participle %in% ignore_list | participle %in% correct_list) {
+    if (participle %in% ignore_list || participle %in% correct_list) {
       next
     }
   
