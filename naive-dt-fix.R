@@ -50,7 +50,9 @@ fix_participle_dt <- function(df,
     # We replace all wrong attestations with the correct spelling
     if (participle_alternative_frequency > participle_frequency | 
           alternative_form %in% correct_list) {
-      df[[column]] <- gsub(participle, alternative_form, df[[column]])
+      df[[column]] <- gsub(paste0(participle, "$"),
+                           alternative_form,
+                           df[[column]])
       print(paste0("Replacing '", participle, "' with '", alternative_form,
                    "'"))
     }
