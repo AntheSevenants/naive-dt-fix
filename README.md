@@ -29,6 +29,11 @@ There are a few problems with this approach. I tried to rectify these as well as
 
 ## How to use the library
 
+Install the `stringr` library:
+```r
+install.packages(stringr)
+```
+
 Place `naive-dt-fix.R` from this repository in the directory of your R project. Then, in your script, import the R file:
 ```r
 source("naive-dt-fix.R")
