@@ -59,9 +59,9 @@ df <- fix_participle_dt(df, "deelwoord")
 Each correction will be announced in the R Console:
 
 ```plain
-[1] "Replacing 'gebeurt' with 'gebeurd'"
-[1] "Replacing 'verandert' with 'veranderd'"
-[1] "Replacing 'geraced' with 'geracet'"
+[1] "Will replace 'gebeurt' with 'gebeurd'"
+[1] "Will replace 'verandert' with 'veranderd'"
+[1] "Will replace 'geraced' with 'geracet'"
 ```
 
 Check this output for mistakes! The library is by NO means perfect!
