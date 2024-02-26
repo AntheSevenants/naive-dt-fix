@@ -1,3 +1,5 @@
+library(stringr)
+
 fix_participle_dt <- function(df,
   column,
   ignore_list=c("geplant", "gepland", "ingeplant", "ingepland",
@@ -9,6 +11,10 @@ fix_participle_dt <- function(df,
   all_participles <- unique(df[[column]])
   # Then, create a frequency table so we can compare forms against each other
   participle_counts <- table(df[[column]])
+
+  # Vector of replacements we will make
+  replacements <- c()
+  keys <- c()
 
   # We go over each participle in the dataset one by one
   for (participle in all_participles) {
@@ -50,13 +56,16 @@ fix_participle_dt <- function(df,
     # We replace all wrong attestations with the correct spelling
     if (participle_alternative_frequency > participle_frequency | 
           alternative_form %in% correct_list) {
-      df[[column]] <- gsub(paste0(participle, "$"),
-                           alternative_form,
-                           df[[column]])
-      print(paste0("Replacing '", participle, "' with '", alternative_form,
+      replacements <- append(replacements, alternative_form)
+      keys <- append(keys, participle)
+      print(paste0("Will replace '", participle, "' with '", alternative_form,
                    "'"))
     }
   }
+
+  names(replacements) <- keys
+  
+  df[[column]] <- stringr::str_replace_all(df[[column]], replacements)
   
   return(df)
 }
